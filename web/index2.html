@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Socket.IO Chat</title>
+</head>
+
+<body>
+    <ul id="messages"></ul>
+    <form action="">
+        <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        // Chat namespace
+        const chatSocket = io('http://localhost:3000/chat');
+
+        chatSocket.on('connect', () => {
+            console.log('Connected to chat namespace');
+        });
+
+        chatSocket.on('chat message', (msg) => {
+            $('#messages').append($('<li>').text(msg));
+        });
+
+        $('form').submit(() => {
+            chatSocket.emit('chat message', $('#input').val());
+            $('#input').val('');
+            return false;
+        });
+
+        // Notification namespace
+        const notificationSocket = io('http://localhost:3000/notification');
+
+        notificationSocket.on('connect', () => {
+            console.log('Connected to notification namespace');
+        });
+
+        notificationSocket.on('new notification', (data) => {
+            alert(`New notification: ${data.message}`);
+        });
+    </script>
+</body>
+
+</html>

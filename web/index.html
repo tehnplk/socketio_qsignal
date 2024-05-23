@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>จอ Q</title>
+
+</head>
+
+<body>
+    <h1>ตรวจสอบการเชื่อมต่อ Q-Server</h1>
+    <div id="d"></div>
+    <script src="./js/socket.io.min.js"></script>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="./js/q_socket.js"></script>
+    <script>
+
+        socket.on('connect', () => {
+            console.log('Connected to server');
+            $('h1').html("Connected to Q-server Success.!!")
+        });
+
+        socket.on('sc1', (msg) => {
+            console.log('SC1 from server:', msg);
+            $('#d').html(msg)
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Disconnected from server');
+            $('h1').html("Connected to Q-server Fail.!!")
+        });
+    </script>
+</body>
+
+</html>
