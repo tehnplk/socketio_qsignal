@@ -5,13 +5,15 @@ const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
+app.use(cors());
+
 const io = socketIO(server, {
     cors: {
         origin: '*',
     }
 });
 
-app.use(cors());
+
 
 const PORT = 3000;
 
