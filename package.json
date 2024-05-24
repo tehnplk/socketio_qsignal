@@ -2,6 +2,7 @@
   "scripts": {
     "start": "node ./server/index.js",
     "dev": "nodemon ./server/index.js",
-    "serv": "http-server ./client"
+    "serv": "http-server ./client",
+    "all": "concurrently --kill-others \"npm run start\" \"npm run serv\""
   }
 }
