@@ -7,16 +7,22 @@
 </head>
 
 <body>
-    <h1>ตรวจสอบการเชื่อมต่อ Q-Server</h1>
-    <div id="d"></div>
+    <div style="text-align: center;">
+
+        <h1>Client ตรวจสอบการเชื่อมต่อ Q-Server</h1>
+        <div id="d" style="font-size: 40px; background-color: brown; color: white;padding: 5px;"></div>
+
+    </div>
+
     <script src="./js/socket.io.min.js"></script>
     <script src="./js/jquery-3.7.1.min.js"></script>
-    <script src="./js/q_socket.js"></script>
+
     <script>
+        const socket = io('http://localhost:3000');
 
         socket.on('connect', () => {
             console.log('Connected to server');
-            $('h1').html("Connected to Q-server Success.!!")
+            $('h1').html("Client Connected to Q-server Success.!!")
         });
 
         socket.on('sc1', (msg) => {
@@ -26,7 +32,7 @@
 
         socket.on('disconnect', () => {
             console.log('Disconnected from server');
-            $('h1').html("Connected to Q-server Fail.!!")
+            $('h1').html("Client Connected to Q-server Fail.!!")
         });
     </script>
 </body>
