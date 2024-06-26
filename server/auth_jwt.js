@@ -29,7 +29,8 @@ const authenticateToken = (req, res, next) => {
     if (token == null) return res.sendStatus(401); // If no token, unauthorized
 
     jwt.verify(token, SECRET_KEY, (err, user) => {
-        if (err) return res.status(403).send('invalid token or expire'); // If token invalid, forbidden
+        console.log('err',err)
+        if (err.message) return res.status(403).send('invalid token or expire'); // If token invalid, forbidden
         req.user = user;
         next();
     });

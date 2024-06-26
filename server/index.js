@@ -15,7 +15,7 @@ const io = socketIO(server, {
 
 
 
-const PORT = 3000;
+const PORT = 19009;
 
 var client = require("socket.io-client")(`http://localhost:${PORT}`);
 
@@ -40,10 +40,22 @@ io.on('connection', (socket) => {
         console.log(`${socket.handshake.address} disconnected.!!`);
     });
 
-    socket.on('sc1', (msg) => {
-        io.emit('sc1', msg); // ส่งกลับไปคนที่ส่งมาด้วย
-        //socket.broadcast.emit('sc1', msg); // ไม่ส่งกลับไปคนที่ส่งมา        
-        console.log(`${socket.handshake.address} emit sc1`, msg);
+    socket.on('a', (msg) => {
+        io.emit('a', msg); // ส่งกลับไปคนที่ส่งมาด้วย
+        socket.broadcast.emit('z', msg); // ไม่ส่งกลับไปคนที่ส่งมา        
+        console.log(`${socket.handshake.address} emit a`, msg);
+    });
+
+    socket.on('b', (msg) => {
+        io.emit('b', msg); // ส่งกลับไปคนที่ส่งมาด้วย
+        socket.broadcast.emit('z', msg); // ไม่ส่งกลับไปคนที่ส่งมา        
+        console.log(`${socket.handshake.address} emit b`, msg);
+    });
+
+    socket.on('z', (msg) => {
+        io.emit('z', msg); // ส่งกลับไปคนที่ส่งมาด้วย
+        //socket.broadcast.emit('z', msg); // ไม่ส่งกลับไปคนที่ส่งมา        
+        console.log(`${socket.handshake.address} emit z`, msg);
     });
 
 
